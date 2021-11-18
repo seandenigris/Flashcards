@@ -150,7 +150,7 @@ FsQuestion >> asFlashCard [
 
 { #category : #accessing }
 FsQuestion >> bestAnswer [
-	^ self answerChoices detectMax: [ :e | e grade score ]
+	^ self answerChoices detectMax: [ :e | e grade "score" ]
 ]
 
 { #category : #accessing }
