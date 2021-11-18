@@ -11,7 +11,7 @@ Class {
 { #category : #examples }
 FsFlashCardMorph class >> example1 [
 	<gtExample>
-	^ self new openInWindow; inspect.
+	^ self new openInWindow.
 ]
 
 { #category : #private }
