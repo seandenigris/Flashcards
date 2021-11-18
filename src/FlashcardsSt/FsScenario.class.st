@@ -4,10 +4,35 @@ Class {
 	#instVars : [
 		'questions',
 		'source',
-		'name'
+		'name',
+		'lepiterPage',
+		'lepiterDatabase'
+	],
+	#classVars : [
+		'LepiterDatabase'
 	],
 	#category : #'FlashcardsSt-Core'
 }
+
+{ #category : #examples }
+FsScenario class >> exampleEmpty [
+	<gtExample>
+	^ self new
+		lepiterDatabase: LeDatabase new;
+		yourself
+]
+
+{ #category : #accessing }
+FsScenario class >> lepiterDatabase [
+	LepiterDatabase ifNotNil: [ ^ LepiterDatabase ].
+	
+	^ LepiterDatabase := LeDatabase new
+]
+
+{ #category : #accessing }
+FsScenario >> contents [
+	^ self lepiterPage
+]
 
 { #category : #'accessing-magritte' }
 FsScenario >> descriptionName [
@@ -35,8 +60,40 @@ FsScenario >> descriptionSource [
 ]
 
 { #category : #accessing }
+FsScenario >> gtViewContentsOn: aView [
+	<gtView>
+	
+	^ aView forward
+		title: 'Contents';
+		priority: 10;
+		object: [ self contents ];
+		view: #gtLiveFor:
+]
+
+{ #category : #accessing }
+FsScenario >> lepiterDatabase [
+	^ lepiterDatabase ifNil: [ self class lepiterDatabase ]
+]
+
+{ #category : #accessing }
+FsScenario >> lepiterDatabase: anLeDatabase [
+	lepiterDatabase := anLeDatabase
+]
+
+{ #category : #accessing }
+FsScenario >> lepiterPage [
+	lepiterPage ifNotNil: [ ^ lepiterPage ].
+	
+	lepiterPage := LePage unnamedPageWithDefaultTitle: ''.
+	^ self lepiterDatabase addPage: lepiterPage 
+		"addSnippet: LeTextSnippet empty; from IdMind, not sure if applies here
+		yourself"
+]
+
+{ #category : #accessing }
 FsScenario >> name [
-	^ self maLazyFrom: self descriptionName
+
+	^ self maLazyInstVarUsing: self descriptionName
 ]
 
 { #category : #accessing }
@@ -45,8 +102,21 @@ FsScenario >> name: anObject [
 ]
 
 { #category : #accessing }
+FsScenario >> printOn: aStream [
+	name
+		ifNotNil: [ 
+			aStream
+				nextPut: $";
+				nextPutAll: self name;
+				nextPut: $";
+				nextPutAll: ' Scenario' ]
+		ifNil: [ super printOn: aStream ]
+]
+
+{ #category : #accessing }
 FsScenario >> questions [
-	^ self maLazyFrom: self descriptionQuestions
+
+	^ self maLazyInstVarUsing: self descriptionQuestions
 ]
 
 { #category : #accessing }
@@ -56,7 +126,8 @@ FsScenario >> questions: anObject [
 
 { #category : #accessing }
 FsScenario >> source [
-	^ self maLazyFrom: self descriptionSource
+
+	^ self maLazyInstVarUsing: self descriptionSource
 ]
 
 { #category : #accessing }
