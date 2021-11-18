@@ -11,6 +11,70 @@ Class {
 }
 
 { #category : #accessing }
+FsAnswerChoice class >> exampleBestA [
+	<gtExample>
+	^ self
+		given: []
+		when: [ 
+			self new
+				order: 1;
+				text: 'Best choice';
+				grade: 2;
+				analysis: 'This choice is better than the others';
+				yourself ]
+		then: [ :result | 
+			result letter should equal: $a. ]
+]
+
+{ #category : #accessing }
+FsAnswerChoice class >> exampleGoodD [
+	<gtExample>
+	^ self
+		given: []
+		when: [ 
+			self new
+				order: 4;
+				text: 'Good choice';
+				grade: 1;
+				analysis: 'This choice is good, but not the best';
+				yourself ]
+		then: [ :result | 
+			result letter should equal: $d. ]
+]
+
+{ #category : #accessing }
+FsAnswerChoice class >> exampleNeutralC [
+	<gtExample>
+	^ self
+		given: []
+		when: [ 
+			self new
+				order: 3;
+				text: 'Neutral choice';
+				grade: 2;
+				analysis: 'This choice is average compared to the others';
+				yourself ]
+		then: [ :result | 
+			result letter should equal: $c. ]
+]
+
+{ #category : #accessing }
+FsAnswerChoice class >> exampleWorstB [
+	<gtExample>
+	^ self
+		given: []
+		when: [ 
+			self new
+				order: 2;
+				text: 'Worst choice';
+				grade: -2;
+				analysis: 'This choice is worse than the others';
+				yourself ]
+		then: [ :result | 
+			result letter should equal: $b. ]
+]
+
+{ #category : #accessing }
 FsAnswerChoice >> analysis [
 
 	^ analysis

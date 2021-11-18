@@ -24,6 +24,26 @@ FsQuestion class >> bank [
 	^ Bank ifNil: [ Bank := Bag new ]
 ]
 
+{ #category : #examples }
+FsQuestion class >> example [
+	<gtExample>
+	^ self
+		given: []
+		when: [ 
+			self new
+				number: 1;
+				text: 'Question?';
+				analysis: 'This question is straighforward. Don''t ready into it!';
+				answerChoices: { 
+					FsAnswerChoice exampleBestA.
+					FsAnswerChoice exampleWorstB.
+					FsAnswerChoice exampleNeutralC.
+					FsAnswerChoice exampleGoodD };
+				yourself ]
+		then: [ :result |
+			result bestAnswer should equal: result answerChoices first ]
+]
+
 { #category : #'instance creation' }
 FsQuestion class >> exportAsCSV [
 	<script>
