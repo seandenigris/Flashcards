@@ -1,0 +1,109 @@
+Class {
+	#name : #FsQuestionElement,
+	#superclass : #BrVerticalPane,
+	#instVars : [
+		'model',
+		'chosenAnswer'
+	],
+	#category : #'FlashcardsSt-UI'
+}
+
+{ #category : #'instance creation' }
+FsQuestionElement class >> on: aQuestion [
+	^ self new
+		model: aQuestion;
+		yourself
+]
+
+{ #category : #accessing }
+FsQuestionElement >> chooseAnswer: anElement [
+
+	chosenAnswer ifNotNil: [ ^ self ].
+	chosenAnswer := anElement model.
+	anElement markChosen.
+	self gradeAnswer.
+	self showAnalysis.
+]
+
+{ #category : #accessing }
+FsQuestionElement >> fontSize [
+	^ 20
+]
+
+{ #category : #accessing }
+FsQuestionElement >> gradeAnswer [
+	| text |
+	text := chosenAnswer = self model bestAnswer
+		ifTrue: [ 
+			(Character value: 16r2713) asRopedText
+				foreground: Color green;
+				bold ]
+		ifFalse: [ 'X' asRopedText foreground: Color red ].
+	self addChild: (BrLabel new
+		text: (text fontSize: self fontSize * 2);
+		aptitude: BrGlamorousLabelAptitude new;
+		constraintsDo: [ :c | c ignoreByLayout ];
+		yourself)
+]
+
+{ #category : #accessing }
+FsQuestionElement >> initialize [
+	super initialize.
+	
+	"Adapted from GtRefactoringsElement"
+	self constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical fitContent ].
+		
+	self cellSpacing: 10
+]
+
+{ #category : #accessing }
+FsQuestionElement >> markAnswer: anElement [
+
+	| answerMark |
+	answerMark := BlElement new
+		geometry: BlCircleGeometry new;
+		size: 20 @ 20;
+		border: (BlBorder paint: (Color gray alpha: 0.8) width: 3);
+		yourself.
+	anElement addChild: answerMark
+]
+
+{ #category : #accessing }
+FsQuestionElement >> model [
+
+	^ model
+]
+
+{ #category : #accessing }
+FsQuestionElement >> model: anObject [
+
+	| text |
+	
+	model := anObject.
+	self removeChildren.
+	
+	text := self newLabelWithText: self model text.
+	text userData at: #analysis put: self model analysis.
+	self addChild: text.
+	
+	self model answerChoices do: [ :ans | self addChild: (ans asElement fontSize: self fontSize) ]
+]
+
+{ #category : #accessing }
+FsQuestionElement >> newLabelWithText: aStringOrText [
+	^ BrLabel new 
+		text: (aStringOrText asRopedText fontSize: self fontSize); 
+		aptitude: BrGlamorousLabelAptitude new; 
+		hMatchParent; 
+		vFitContent; 
+		yourself
+]
+
+{ #category : #accessing }
+FsQuestionElement >> showAnalysis [
+	self children 
+		select: [ :e | e isKindOf: FsAnswerChoiceElement ]
+		thenDo: [ :e | e showAnalysis ]
+]

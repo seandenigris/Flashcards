@@ -37,8 +37,14 @@ FsAnswerChoice >> analysisText [
 ]
 
 { #category : #accessing }
+FsAnswerChoice >> asElement [
+	^ FsAnswerChoiceElement on: self
+]
+
+{ #category : #accessing }
 FsAnswerChoice >> grade [
-	^ self maLazyFrom: self descriptionGrade
+
+	^ self maLazyInstVarUsing: self gradeDescription
 ]
 
 { #category : #accessing }
@@ -55,6 +61,26 @@ FsAnswerChoice >> gradeDescription [
 		yourself
 ]
 
+{ #category : #accessing }
+FsAnswerChoice >> gradeText [
+	| result |
+	result := self grade asRopedText.
+	self grade = 2 ifTrue: [ ^ result foreground: Color green ].
+	self grade = 1 ifTrue: [ ^ result foreground: Color yellow ].
+	self grade = -1 ifTrue: [ ^ result foreground: Color orange ].
+	self grade = -2 ifTrue: [ ^ result foreground: Color red ].
+	^ result
+]
+
+{ #category : #accessing }
+FsAnswerChoice >> gtElementViewFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Element';
+		priority: 25;
+		stencil: [ self asElement ]
+]
+
 { #category : #predicates }
 FsAnswerChoice >> letter [
 	^ Character value: $a asciiValue + self order - 1
@@ -62,7 +88,8 @@ FsAnswerChoice >> letter [
 
 { #category : #accessing }
 FsAnswerChoice >> order [
-	^ self maLazyFrom: self descriptionOrder
+
+	^ self maLazyInstVarUsing: self orderDescription
 ]
 
 { #category : #accessing }
@@ -91,7 +118,8 @@ FsAnswerChoice >> printOn: aStream [
 
 { #category : #accessing }
 FsAnswerChoice >> text [
-	^ self maLazyFrom: self descriptionText
+
+	^ self maLazyInstVarUsing: self textDescription
 ]
 
 { #category : #accessing }

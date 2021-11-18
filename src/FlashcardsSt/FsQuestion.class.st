@@ -97,7 +97,8 @@ FsQuestion >> analysisDescription [
 
 { #category : #accessing }
 FsQuestion >> answerChoices [
-	^ self maLazyFrom: self descriptionAnswerChoices
+
+	^ self maLazyInstVarUsing: self answerChoicesDescription
 ]
 
 { #category : #accessing }
@@ -115,6 +116,11 @@ FsQuestion >> answerChoicesDescription [
 		yourself
 ]
 
+{ #category : #accessing }
+FsQuestion >> asElement [
+	^ FsQuestionElement on: self.
+]
+
 { #category : #converting }
 FsQuestion >> asFlashCard [
 	^ FsFlashCard new
@@ -127,6 +133,15 @@ FsQuestion >> bestAnswer [
 	^ self answerChoices detectMax: [ :e | e grade score ]
 ]
 
+{ #category : #accessing }
+FsQuestion >> gtElementViewFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Element';
+		priority: 25;
+		stencil: [ self asElement ]
+]
+
 { #category : #'as yet unclassified' }
 FsQuestion >> gtInspectorTextIn: composite [
 	<gtInspectorPresentationOrder: -10>
@@ -137,7 +152,8 @@ FsQuestion >> gtInspectorTextIn: composite [
 
 { #category : #accessing }
 FsQuestion >> number [
-	^ self maLazyFrom: self descriptionNumber
+
+	^ self maLazyInstVarUsing: self numberDescription
 ]
 
 { #category : #accessing }
@@ -170,7 +186,8 @@ FsQuestion >> questions [
 
 { #category : #accessing }
 FsQuestion >> sources [
-	^ self maLazyFrom: self descriptionSources
+
+	^ self maLazyInstVarUsing: self sourcesDescription
 ]
 
 { #category : #accessing }
@@ -190,7 +207,8 @@ FsQuestion >> sourcesDescription [
 
 { #category : #accessing }
 FsQuestion >> text [
-	^ self maLazyFrom: self descriptionText
+
+	^ self maLazyInstVarUsing: self textDescription
 ]
 
 { #category : #accessing }
