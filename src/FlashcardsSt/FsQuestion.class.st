@@ -105,6 +105,16 @@ FsQuestion >> answerChoices: anObject [
 	answerChoices := anObject
 ]
 
+{ #category : #'accessing-magritte' }
+FsQuestion >> answerChoicesDescription [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		accessor: #answerChoices;
+		classes: { FsAnswerChoice };
+		default: OrderedCollection new;
+		yourself
+]
+
 { #category : #converting }
 FsQuestion >> asFlashCard [
 	^ FsFlashCard new
@@ -115,41 +125,6 @@ FsQuestion >> asFlashCard [
 { #category : #accessing }
 FsQuestion >> bestAnswer [
 	^ self answerChoices detectMax: [ :e | e grade score ]
-]
-
-{ #category : #'accessing-magritte' }
-FsQuestion >> descriptionAnswerChoices [
-	<magritteDescription>
-	^ MAToManyRelationDescription new
-		accessor: #answerChoices;
-		classes: { FsAnswerChoice };
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsQuestion >> descriptionNumber [
-	<magritteDescription>
-	^ MANumberDescription new
-		accessor: #number;
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsQuestion >> descriptionSources [
-	<magritteDescription>
-	^ MAToManyRelationDescription new
-		accessor: #sources;
-		classes: QuCitation subclasses;
-		default: Bag new;
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsQuestion >> descriptionText [
-	<magritteDescription>
-	^ MAStringDescription new
-		accessor: #text;
-		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -168,6 +143,14 @@ FsQuestion >> number [
 { #category : #accessing }
 FsQuestion >> number: anObject [
 	number := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsQuestion >> numberDescription [
+	<magritteDescription>
+	^ MANumberDescription new
+		accessor: #number;
+		yourself
 ]
 
 { #category : #printing }
@@ -195,6 +178,16 @@ FsQuestion >> sources: anObject [
 	sources := anObject
 ]
 
+{ #category : #'accessing-magritte' }
+FsQuestion >> sourcesDescription [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		accessor: #sources;
+		classes: QuCitation subclasses;
+		default: Bag new;
+		yourself
+]
+
 { #category : #accessing }
 FsQuestion >> text [
 	^ self maLazyFrom: self descriptionText
@@ -203,4 +196,12 @@ FsQuestion >> text [
 { #category : #accessing }
 FsQuestion >> text: anObject [
 	text := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsQuestion >> textDescription [
+	<magritteDescription>
+	^ MAStringDescription new
+		accessor: #text;
+		yourself
 ]

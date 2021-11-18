@@ -10,40 +10,6 @@ Class {
 	#category : #'FlashcardsSt-Core'
 }
 
-{ #category : #'accessing-magritte' }
-FsResponse >> descriptionDuration [
-	<magritteDescription>
-	^ MADurationDescription new
-		accessor: #duration;
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsResponse >> descriptionGrade [
-	<magritteDescription>
-	^ MAToOneRelationDescription new
-		accessor: #grade;
-		classes:(Set new add: FsAnswerGrade; yourself);
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsResponse >> descriptionQuestion [
-	<magritteDescription>
-	^ MAToOneRelationDescription new
-		accessor: #question;
-		classes: (Set new add: FsQuestion; yourself);
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsResponse >> descriptionTimestamp [
-	<magritteDescription>
-	^ MADateAndTimeDescription new
-		accessor: #timestamp;
-		yourself
-]
-
 { #category : #accessing }
 FsResponse >> duration [
 	^ self maLazyFromDescriptionOf: #duration
@@ -52,6 +18,14 @@ FsResponse >> duration [
 { #category : #accessing }
 FsResponse >> duration: anObject [
 	duration := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsResponse >> durationDescription [
+	<magritteDescription>
+	^ MADurationDescription new
+		accessor: #duration;
+		yourself
 ]
 
 { #category : #accessing }
@@ -64,6 +38,15 @@ FsResponse >> grade: anObject [
 	grade := anObject
 ]
 
+{ #category : #'accessing-magritte' }
+FsResponse >> gradeDescription [
+	<magritteDescription>
+	^ MAToOneRelationDescription new
+		accessor: #grade;
+		classes:(Set new add: FsAnswerGrade; yourself);
+		yourself
+]
+
 { #category : #accessing }
 FsResponse >> question [
 	^ question
@@ -74,6 +57,15 @@ FsResponse >> question: anObject [
 	question := anObject
 ]
 
+{ #category : #'accessing-magritte' }
+FsResponse >> questionDescription [
+	<magritteDescription>
+	^ MAToOneRelationDescription new
+		accessor: #question;
+		classes: (Set new add: FsQuestion; yourself);
+		yourself
+]
+
 { #category : #accessing }
 FsResponse >> timestamp [
 	^ timestamp
@@ -82,4 +74,12 @@ FsResponse >> timestamp [
 { #category : #accessing }
 FsResponse >> timestamp: anObject [
 	timestamp := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsResponse >> timestampDescription [
+	<magritteDescription>
+	^ MADateAndTimeDescription new
+		accessor: #timestamp;
+		yourself
 ]

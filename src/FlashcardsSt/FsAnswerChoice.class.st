@@ -36,31 +36,6 @@ FsAnswerChoice >> analysisText [
 	^ self gradeText, ' ' asRopedText, self analysis asRopedText italic
 ]
 
-{ #category : #'accessing-magritte' }
-FsAnswerChoice >> descriptionGrade [
-	<magritteDescription>
-	^ MAOptionDescription new
-		accessor: #grade;
-		optionsTextual: 'Right Wrong -2 -1 0 1 2';
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsAnswerChoice >> descriptionOrder [
-	<magritteDescription>
-	^ MANumberDescription new
-		accessor: #order;
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
-FsAnswerChoice >> descriptionText [
-	<magritteDescription>
-	^ MAMemoDescription new
-		accessor: #text;
-		yourself
-]
-
 { #category : #accessing }
 FsAnswerChoice >> grade [
 	^ self maLazyFrom: self descriptionGrade
@@ -69,6 +44,15 @@ FsAnswerChoice >> grade [
 { #category : #accessing }
 FsAnswerChoice >> grade: anObject [
 	grade := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsAnswerChoice >> gradeDescription [
+	<magritteDescription>
+	^ MAOptionDescription new
+		accessor: #grade;
+		optionsTextual: 'Right Wrong -2 -1 0 1 2';
+		yourself
 ]
 
 { #category : #predicates }
@@ -84,6 +68,15 @@ FsAnswerChoice >> order [
 { #category : #accessing }
 FsAnswerChoice >> order: anObject [
 	order := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsAnswerChoice >> orderDescription [
+	<magritteDescription>
+	^ MANumberDescription new
+		accessor: #order;
+		default: 1;
+		yourself
 ]
 
 { #category : #printing }
@@ -104,4 +97,13 @@ FsAnswerChoice >> text [
 { #category : #accessing }
 FsAnswerChoice >> text: anObject [
 	text := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsAnswerChoice >> textDescription [
+	<magritteDescription>
+	^ MAMemoDescription new
+		accessor: #text;
+		default: '';
+		yourself
 ]
