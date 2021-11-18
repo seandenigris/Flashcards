@@ -4,10 +4,37 @@ Class {
 	#instVars : [
 		'order',
 		'text',
-		'grade'
+		'grade',
+		'analysis'
 	],
 	#category : #'FlashcardsSt-Core'
 }
+
+{ #category : #accessing }
+FsAnswerChoice >> analysis [
+
+	^ analysis
+]
+
+{ #category : #accessing }
+FsAnswerChoice >> analysis: anObject [
+
+	analysis := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsAnswerChoice >> analysisDescription [
+	<magritteDescription>
+	^ MAMemoDescription new
+		accessor: #analysis;
+		default: '';
+		yourself
+]
+
+{ #category : #accessing }
+FsAnswerChoice >> analysisText [
+	^ self gradeText, ' ' asRopedText, self analysis asRopedText italic
+]
 
 { #category : #'accessing-magritte' }
 FsAnswerChoice >> descriptionGrade [

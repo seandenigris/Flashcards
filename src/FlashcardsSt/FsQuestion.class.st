@@ -5,7 +5,8 @@ Class {
 		'number',
 		'text',
 		'answerChoices',
-		'sources'
+		'sources',
+		'analysis'
 	],
 	#classVars : [
 		'Bank'
@@ -62,6 +63,36 @@ FsQuestion class >> parser [
 				text: n second trimRight withSeparatorsCompacted;
 				answerChoices: n third;
 				yourself ].
+]
+
+{ #category : #accessing }
+FsQuestion >> addAnalysis: aQuestion [
+	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
+	self analysis: aQuestion analysis.
+	aQuestion answerChoices doWithIndex: [ :ans :i |
+		| target |
+		target := self answerChoices at: i.
+		target grade: ans grade.
+		target analysis: ans analysis ]
+]
+
+{ #category : #accessing }
+FsQuestion >> analysis [
+
+	^ self maLazyInstVarUsing: self analysisDescription
+]
+
+{ #category : #accessing }
+FsQuestion >> analysis: aString [
+	analysis := aString
+]
+
+{ #category : #'accessing-magritte' }
+FsQuestion >> analysisDescription [
+	<magritteDescription>
+	^ MAMemoDescription new
+		accessor: #analysis;
+		yourself
 ]
 
 { #category : #accessing }
