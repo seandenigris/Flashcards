@@ -64,25 +64,7 @@ FsQuestion class >> from: aString [
 
 { #category : #'instance creation' }
 FsQuestion class >> parser [
-	| choiceLetter choicePrefix choice question questionPrefix |
-	questionPrefix := #startOfLine asPParser, #digit asPParser plus flatten, '. ' asPParser ==> #second.
-	choiceLetter := $a asPParser / $b asPParser / $c asPParser
-		/ $d asPParser.
-	choicePrefix := #startOfLine asPParser, choiceLetter , '. ' asPParser ==> #second.
-	choice := choicePrefix, (choicePrefix / questionPrefix) negate plus flatten
-		==> [ :n | 
-			FsAnswerChoice new
-				order: n first asciiValue - $a asciiValue + 1;
-				text: n second trimRight withSeparatorsCompacted;
-				yourself ].
-	question := questionPrefix optional, (choicePrefix / questionPrefix) negate plus flatten.
-	^ question , choice star
-		==> [ :n | 
-			self new
-				number: n first asString asNumber;
-				text: n second trimRight withSeparatorsCompacted;
-				answerChoices: n third;
-				yourself ].
+	^ FsQuestionParser
 ]
 
 { #category : #accessing }
