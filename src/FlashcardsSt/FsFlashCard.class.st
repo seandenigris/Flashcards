@@ -12,7 +12,7 @@ Class {
 
 { #category : #accessing }
 FsFlashCard class >> deck [
-	^ deck ifNil: [ deck := OrderedCollection new ]
+	^ deck ifNil: [ deck := FsCardDeck new ]
 ]
 
 { #category : #accessing }
