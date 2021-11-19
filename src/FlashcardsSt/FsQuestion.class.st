@@ -16,7 +16,7 @@ Class {
 
 { #category : #'instance creation' }
 FsQuestion class >> allFrom: aString [
-	^ self parser plus parse: aString
+	^ self parser new plus parse: aString
 ]
 
 { #category : #'instance creation' }
