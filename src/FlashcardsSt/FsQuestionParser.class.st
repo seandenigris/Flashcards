@@ -50,7 +50,10 @@ FsQuestionParser >> choiceLetter [
 FsQuestionParser >> choicePrefix [
 	| choiceLetter |
 	choiceLetter := PP2PredicateObjectNode anyOf: 'abcdABCD'. "case is a common OCR error, so accept either"
-	^ #startOfLine asPParser , choiceLetter , '.' asPParser ==> [ :n | n second asLowercase ].
+	^ #startOfLine asPParser, 
+		choiceLetter, 
+			#space asPParser optional, "common OCR error"
+				'.' asPParser ==> [ :n | n second asLowercase ].
 ]
 
 { #category : #accessing }
@@ -65,7 +68,9 @@ FsQuestionParser >> newQuestionFromNumber: aNumber string: aString andChoices: a
 
 { #category : #accessing }
 FsQuestionParser >> questionPrefix [
-	^ #startOfLine asPParser, #digit asPParser plus flatten, '.' asPParser ==> #second.
+	^ #startOfLine asPParser, #digit asPParser plus flatten, 
+		#space asPParser optional, "common OCR error"
+		'.' asPParser ==> #second.
 ]
 
 { #category : #accessing }
