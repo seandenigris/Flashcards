@@ -84,18 +84,17 @@ FsQuestionElement >> model: anObject [
 	model := anObject.
 	self removeChildren.
 	
-	text := self newLabelWithText: self model text.
-	text userData at: #analysis put: self model analysis.
+	text := self newElementWithText: self model text.
 	self addChild: text.
 	
 	self model answerChoices do: [ :ans | self addChild: (ans asElement fontSize: self fontSize) ]
 ]
 
 { #category : #accessing }
-FsQuestionElement >> newLabelWithText: aStringOrText [
-	^ BrLabel new 
+FsQuestionElement >> newElementWithText: aStringOrText [
+	^ BrEditor new 
 		text: (aStringOrText asRopedText fontSize: self fontSize); 
-		aptitude: BrGlamorousLabelAptitude new; 
+		aptitude: BrGlamorousEditorAptitude new; 
 		hMatchParent; 
 		vFitContent; 
 		yourself
