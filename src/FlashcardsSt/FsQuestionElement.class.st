@@ -102,7 +102,24 @@ FsQuestionElement >> newElementWithText: aStringOrText [
 
 { #category : #accessing }
 FsQuestionElement >> showAnalysis [
+
+	self showGeneralAnalysis.
+	
 	self children 
 		select: [ :e | e isKindOf: FsAnswerChoiceElement ]
 		thenDo: [ :e | e showAnalysis ]
+]
+
+{ #category : #accessing }
+FsQuestionElement >> showGeneralAnalysis [
+	
+	| analysis text |
+	text := self model analysisText.
+	text ifEmpty: [ ^ self ].
+	
+	analysis := (self newElementWithText: text)
+		margin: (BlInsets top: 0 right: 0 bottom: 0 left: self fontSize * 1.5);
+		yourself.
+	self addChild: analysis at: 2.
+
 ]
