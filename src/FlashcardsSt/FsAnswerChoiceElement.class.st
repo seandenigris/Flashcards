@@ -108,10 +108,13 @@ FsAnswerChoiceElement >> reset [
 { #category : #accessing }
 FsAnswerChoiceElement >> showAnalysis [
 
-	| analysis |
+	| analysis text |
+	text := self model analysisText.
+	text ifEmpty: [ ^ self ].
+	
 	analysis := BrEditor new
 		aptitude: BrGlamorousRegularEditorAptitude new;
 		margin: (BlInsets top: 0 right: 0 bottom: 0 left: self fontSize * 1.5);
-		text: (self model analysisText fontSize: self fontSize).
+		text: (text fontSize: self fontSize).
 	self addChild: analysis
 ]
