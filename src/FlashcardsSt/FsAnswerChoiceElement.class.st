@@ -63,10 +63,10 @@ FsAnswerChoiceElement >> model: anAnswerChoice [
 ]
 
 { #category : #accessing }
-FsAnswerChoiceElement >> newLabelWithText: aStringOrText [
-	^ BrLabel new 
+FsAnswerChoiceElement >> new: anElementClass withText: aStringOrText andAptitude: anAptitudeClass [
+	^ anElementClass new 
 		text: (aStringOrText asRopedText fontSize: self fontSize); 
-		aptitude: BrGlamorousLabelAptitude new; 
+		aptitude: anAptitudeClass new; 
 		hMatchParent; 
 		vFitContent; 
 		yourself
@@ -77,12 +77,18 @@ FsAnswerChoiceElement >> reset [
 	| text container |
 	self removeChildren.
 	
-	letter := (self newLabelWithText: self model letter asString, '. ') 
+	letter := (self 
+		new: BrLabel 
+		withText: self model letter asString, '. ' 
+		andAptitude: BrGlamorousLabelAptitude) 
 		layout: BlFrameLayout new;
 		hFitContent; 
 		yourself.
 		
-	text := self newLabelWithText: self model text.
+	text := self 
+		new: BrEditor 
+		withText: self model text
+		andAptitude: BrGlamorousEditorAptitude.
 	
 	container := BrHorizontalPane new
 		hMatchParent;
