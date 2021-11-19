@@ -94,7 +94,13 @@ FsQuestion >> analysisDescription [
 	<magritteDescription>
 	^ MAMemoDescription new
 		accessor: #analysis;
+		default: '';
 		yourself
+]
+
+{ #category : #accessing }
+FsQuestion >> analysisText [
+	^ self analysis asRopedText italic
 ]
 
 { #category : #accessing }
