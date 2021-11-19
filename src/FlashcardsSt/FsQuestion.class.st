@@ -227,7 +227,7 @@ FsQuestion >> text: anObject [
 { #category : #'accessing-magritte' }
 FsQuestion >> textDescription [
 	<magritteDescription>
-	^ MAStringDescription new
+	^ MAMemoDescription new
 		accessor: #text;
 		yourself
 ]
