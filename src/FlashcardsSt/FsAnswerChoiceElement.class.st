@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'model',
 		'letter',
-		'fontSize'
+		'fontSize',
+		'textElement'
 	],
 	#category : #'FlashcardsSt-UI'
 }
@@ -25,6 +26,13 @@ FsAnswerChoiceElement >> fontSize [
 FsAnswerChoiceElement >> fontSize: anInteger [
 	fontSize := anInteger.
 	self reset
+]
+
+{ #category : #accessing }
+FsAnswerChoiceElement >> highlightKeywords [
+
+	self model keywordsDoWithIndex: [ :kw :i |
+		(textElement text from: i to: i + kw size) bold ]
 ]
 
 { #category : #accessing }
@@ -74,7 +82,7 @@ FsAnswerChoiceElement >> new: anElementClass withText: aStringOrText andAptitude
 
 { #category : #accessing }
 FsAnswerChoiceElement >> reset [
-	| text container |
+	| container |
 	self removeChildren.
 	
 	letter := (self 
@@ -85,7 +93,7 @@ FsAnswerChoiceElement >> reset [
 		hFitContent; 
 		yourself.
 		
-	text := self 
+	textElement := self 
 		new: BrEditor 
 		withText: self model text
 		andAptitude: BrGlamorousEditorAptitude.
@@ -99,7 +107,7 @@ FsAnswerChoiceElement >> reset [
 			self parent chooseAnswer: self.
 			anEvent consumed: true ];
 		addChild: letter;
-		addChild: text;
+		addChild: textElement;
 		yourself.
 			
 	self addChild: container
@@ -109,6 +117,8 @@ FsAnswerChoiceElement >> reset [
 FsAnswerChoiceElement >> showAnalysis [
 
 	| analysis text |
+	self highlightKeywords.
+	
 	text := self model analysisText.
 	text ifEmpty: [ ^ self ].
 	

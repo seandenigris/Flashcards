@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrVerticalPane,
 	#instVars : [
 		'model',
-		'chosenAnswer'
+		'chosenAnswer',
+		'textElement'
 	],
 	#category : #'FlashcardsSt-UI'
 }
@@ -47,6 +48,13 @@ FsQuestionElement >> gradeAnswer [
 ]
 
 { #category : #accessing }
+FsQuestionElement >> highlightKeywords [
+
+	self model keywordsDoWithIndex: [ :kw :i |
+		(textElement text from: i to: i + kw size) bold ]
+]
+
+{ #category : #accessing }
 FsQuestionElement >> initialize [
 	super initialize.
 	
@@ -79,13 +87,11 @@ FsQuestionElement >> model [
 { #category : #accessing }
 FsQuestionElement >> model: anObject [
 
-	| text |
-	
 	model := anObject.
 	self removeChildren.
 	
-	text := self newElementWithText: self model text.
-	self addChild: text.
+	textElement := self newElementWithText: self model text.
+	self addChild: textElement.
 	
 	self model answerChoices do: [ :ans | self addChild: (ans asElement fontSize: self fontSize) ]
 ]
@@ -104,6 +110,7 @@ FsQuestionElement >> newElementWithText: aStringOrText [
 FsQuestionElement >> showAnalysis [
 
 	self showGeneralAnalysis.
+	self highlightKeywords.
 	
 	self children 
 		select: [ :e | e isKindOf: FsAnswerChoiceElement ]

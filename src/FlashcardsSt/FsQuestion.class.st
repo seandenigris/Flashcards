@@ -1,6 +1,8 @@
 Class {
 	#name : #FsQuestion,
 	#superclass : #Object,
+	#traits : 'FsTTestMaterial',
+	#classTraits : 'FsTTestMaterial classTrait',
 	#instVars : [
 		'number',
 		'text',
@@ -65,17 +67,6 @@ FsQuestion class >> from: aString [
 { #category : #'instance creation' }
 FsQuestion class >> parser [
 	^ FsQuestionParser
-]
-
-{ #category : #accessing }
-FsQuestion >> addAnalysis: aQuestion [
-	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
-	self analysis: aQuestion analysis.
-	aQuestion answerChoices doWithIndex: [ :ans :i |
-		| target |
-		target := self answerChoices at: i.
-		target grade: ans grade.
-		target analysis: ans analysis ]
 ]
 
 { #category : #accessing }
@@ -156,6 +147,17 @@ FsQuestion >> gtInspectorTextIn: composite [
 	composite text
 		title: 'Question';
 		display: [ self ]
+]
+
+{ #category : #accessing }
+FsQuestion >> importAnalysisFrom: aQuestion [
+	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
+	self analysis: aQuestion analysis.
+	aQuestion answerChoices doWithIndex: [ :ans :i |
+		| target |
+		target := self answerChoices at: i.
+		target grade: ans grade.
+		target analysis: ans analysis ]
 ]
 
 { #category : #accessing }

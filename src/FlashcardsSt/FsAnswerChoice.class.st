@@ -1,6 +1,8 @@
 Class {
 	#name : #FsAnswerChoice,
 	#superclass : #Object,
+	#traits : 'FsTTestMaterial',
+	#classTraits : 'FsTTestMaterial classTrait',
 	#instVars : [
 		'order',
 		'text',
