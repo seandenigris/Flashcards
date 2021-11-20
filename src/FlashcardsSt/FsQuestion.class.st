@@ -139,6 +139,18 @@ FsQuestion >> bestAnswer [
 ]
 
 { #category : #accessing }
+FsQuestion >> fsExportAnalysisTo: aQuestion [
+
+	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
+	aQuestion analysis: self analysis.
+	self answerChoices doWithIndex: [ :ans :i |
+		| target |
+		target := aQuestion answerChoices at: i.
+		target grade: ans grade.
+		target analysis: ans analysis ]
+]
+
+{ #category : #accessing }
 FsQuestion >> gtElementViewFor: aView [
 	<gtView>
 	^ aView explicit
@@ -162,14 +174,8 @@ FsQuestion >> gtInspectorTextIn: composite [
 ]
 
 { #category : #accessing }
-FsQuestion >> importAnalysisFrom: aQuestion [
-	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
-	self analysis: aQuestion analysis.
-	aQuestion answerChoices doWithIndex: [ :ans :i |
-		| target |
-		target := self answerChoices at: i.
-		target grade: ans grade.
-		target analysis: ans analysis ]
+FsQuestion >> importAnalysisFrom: aQuestionOrString [
+	aQuestionOrString fsExportAnalysisTo: self
 ]
 
 { #category : #accessing }
