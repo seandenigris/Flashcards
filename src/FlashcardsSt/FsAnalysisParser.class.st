@@ -1,6 +1,6 @@
 Class {
 	#name : #FsAnalysisParser,
-	#superclass : #FsQuestionParser,
+	#superclass : #FsMultipleChoiceQuestionParser,
 	#category : #'FlashcardsSt-Core'
 }
 

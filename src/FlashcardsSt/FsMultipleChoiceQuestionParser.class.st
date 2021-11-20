@@ -1,5 +1,5 @@
 Class {
-	#name : #FsQuestionParser,
+	#name : #FsMultipleChoiceQuestionParser,
 	#superclass : #PP2CompositeNode,
 	#instVars : [
 		'choiceGrammar'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #examples }
-FsQuestionParser class >> example [
+FsMultipleChoiceQuestionParser class >> example [
 	<gtExample>
 	^ self 
 		given: []
@@ -26,7 +26,7 @@ d. Choice 4' ]
 ]
 
 { #category : #accessing }
-FsQuestionParser >> choice [
+FsMultipleChoiceQuestionParser >> choice [
 	^ self choiceGrammar==> [ :n | 
 		FsAnswerChoice new
 			order: n first asciiValue - $a asciiValue + 1;
@@ -35,19 +35,19 @@ FsQuestionParser >> choice [
 ]
 
 { #category : #accessing }
-FsQuestionParser >> choiceGrammar [
+FsMultipleChoiceQuestionParser >> choiceGrammar [
 
 	^ self choicePrefix, (self choicePrefix / self questionPrefix) negate plus flatten
 ]
 
 { #category : #accessing }
-FsQuestionParser >> choiceLetter [
+FsMultipleChoiceQuestionParser >> choiceLetter [
 
 	^ PP2PredicateObjectNode anyOf: 'abcdABCD'
 ]
 
 { #category : #accessing }
-FsQuestionParser >> choicePrefix [
+FsMultipleChoiceQuestionParser >> choicePrefix [
 	| choiceLetter |
 	choiceLetter := PP2PredicateObjectNode anyOf: 'abcdABCD'. "case is a common OCR error, so accept either"
 	^ #startOfLine asPParser, 
@@ -57,7 +57,7 @@ FsQuestionParser >> choicePrefix [
 ]
 
 { #category : #accessing }
-FsQuestionParser >> newQuestionFromNumber: aNumber string: aString andChoices: aCollection [ 
+FsMultipleChoiceQuestionParser >> newQuestionFromNumber: aNumber string: aString andChoices: aCollection [ 
 
 	^ FsQuestion new
 		number: aNumber;
@@ -67,14 +67,14 @@ FsQuestionParser >> newQuestionFromNumber: aNumber string: aString andChoices: a
 ]
 
 { #category : #accessing }
-FsQuestionParser >> questionPrefix [
+FsMultipleChoiceQuestionParser >> questionPrefix [
 	^ #startOfLine asPParser, #digit asPParser plus flatten, 
 		#space asPParser optional, "common OCR error"
 		'.' asPParser ==> #second.
 ]
 
 { #category : #accessing }
-FsQuestionParser >> start [
+FsMultipleChoiceQuestionParser >> start [
 	| question |
 	question := self questionPrefix optional, (self choicePrefix "/ self questionPrefix") negate plus flatten.
 	^ question , self choice plus ==> [ :n | 

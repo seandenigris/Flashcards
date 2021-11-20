@@ -72,7 +72,7 @@ FsQuestion class >> from: aString [
 
 { #category : #'instance creation' }
 FsQuestion class >> parser [
-	^ FsQuestionParser
+	^ FsMultipleChoiceQuestionParser
 ]
 
 { #category : #accessing }
