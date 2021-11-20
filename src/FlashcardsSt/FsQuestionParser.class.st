@@ -76,8 +76,8 @@ FsQuestionParser >> questionPrefix [
 { #category : #accessing }
 FsQuestionParser >> start [
 	| question |
-	question := self questionPrefix optional, (self choicePrefix / self questionPrefix) negate plus flatten.
-	^ question , self choice star ==> [ :n | 
+	question := self questionPrefix optional, (self choicePrefix "/ self questionPrefix") negate plus flatten.
+	^ question , self choice plus ==> [ :n | 
 		self 
 			newQuestionFromNumber: n first asString asNumber
 			string: n second trimBoth withSeparatorsCompacted
