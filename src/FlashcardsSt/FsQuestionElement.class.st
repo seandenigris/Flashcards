@@ -51,7 +51,7 @@ FsQuestionElement >> gradeAnswer [
 FsQuestionElement >> highlightKeywords [
 
 	self model keywordsDoWithIndex: [ :kw :i |
-		(textElement text from: i to: i + kw size) bold ]
+		(textElement text from: i to: i + kw size -1) bold ]
 ]
 
 { #category : #accessing }
