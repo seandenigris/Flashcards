@@ -1,3 +1,9 @@
+"
+#Analysis
+See implementors of `#fsExportAnalysisTo:`. Test prep sources present analysis in two common ways:
+1. Some structure the analysis to mirror the question i.e. general analysis, followed by analysis for each choice starting with the choice's letter. In that case, we can parse the analysis itself as a question and import from there. 
+2. Some have a free-form paragraph explanation. In this case, it's generally easiest to rework the information into a paragraph, where the first optional line is general analysis of the question and the remaining lines each explain one answer choice.
+"
 Class {
 	#name : #FsQuestion,
 	#superclass : #Object,
@@ -138,7 +144,13 @@ FsQuestion >> gtElementViewFor: aView [
 	^ aView explicit
 		title: 'Element';
 		priority: 25;
-		stencil: [ self asElement ]
+		stencil: [ 
+			BlScrollableElement new 
+				constraintsDo: [ :c |
+					c horizontal matchParent.
+					c vertical matchParent ];
+				addChild: self asElement;
+				yourself ]
 ]
 
 { #category : #'as yet unclassified' }
