@@ -213,6 +213,14 @@ FsQuestion >> questions [
 ]
 
 { #category : #accessing }
+FsQuestion >> rightAnswerIndex: aNumber [
+	self answerChoices doWithIndex: [ :ans :i |
+		i = aNumber
+			ifTrue: [ ans grade: 2 ]
+			ifFalse: [ ans grade: -2 ] ]
+]
+
+{ #category : #accessing }
 FsQuestion >> sources [
 
 	^ self maLazyInstVarUsing: self sourcesDescription
