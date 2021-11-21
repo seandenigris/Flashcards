@@ -37,7 +37,7 @@ FsMultipleChoiceQuestionParser >> choice [
 { #category : #accessing }
 FsMultipleChoiceQuestionParser >> choiceGrammar [
 
-	^ self choicePrefix, (self choicePrefix / self questionPrefix) negate plus flatten
+	^ self choicePrefix, (self choicePrefix / self questionPrefix / (#startOfLine asPParser, #newline asPParser)) negate plus flatten
 ]
 
 { #category : #accessing }
@@ -50,10 +50,9 @@ FsMultipleChoiceQuestionParser >> choiceLetter [
 FsMultipleChoiceQuestionParser >> choicePrefix [
 	| choiceLetter |
 	choiceLetter := PP2PredicateObjectNode anyOf: 'abcdABCD'. "case is a common OCR error, so accept either"
-	^ #startOfLine asPParser, 
-		choiceLetter, 
-			#space asPParser optional, "common OCR error"
-				'.' asPParser ==> [ :n | n second asLowercase ].
+	^ #startOfLine asPParser,  #space asPParser star, choiceLetter, 
+		#space asPParser optional, "common OCR error"
+			'.' asPParser, $) asPParser optional ==> [ :n | n third asLowercase ].
 ]
 
 { #category : #accessing }
@@ -68,18 +67,20 @@ FsMultipleChoiceQuestionParser >> newQuestionFromNumber: aNumber string: aString
 
 { #category : #accessing }
 FsMultipleChoiceQuestionParser >> questionPrefix [
-	^ #startOfLine asPParser, #digit asPParser plus flatten, 
+	^ #startOfLine asPParser, #space asPParser star, #digit asPParser plus flatten, 
 		#space asPParser optional, "common OCR error"
-		'.' asPParser ==> #second.
+		'.' asPParser, $) asPParser optional ==> #third.
 ]
 
 { #category : #accessing }
 FsMultipleChoiceQuestionParser >> start [
 	| question |
 	question := self questionPrefix optional, (self choicePrefix "/ self questionPrefix") negate plus flatten.
-	^ question , self choice plus ==> [ :n | 
+	^ question , self choice plus ==> [ :nodes | 
+		| number |
+		number := nodes first ifNotNil: [ :num | num asString asNumber ].
 		self 
-			newQuestionFromNumber: n first asString asNumber
-			string: n second trimBoth withSeparatorsCompacted
-			andChoices: n third ].
+			newQuestionFromNumber: number
+			string: nodes second trimBoth withSeparatorsCompacted
+			andChoices: nodes third ].
 ]
