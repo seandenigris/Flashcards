@@ -79,7 +79,7 @@ FsAnswerChoice class >> exampleWorstB [
 { #category : #accessing }
 FsAnswerChoice >> analysis [
 
-	^ analysis
+	^ analysis ifNil: [ '' ]
 ]
 
 { #category : #accessing }
@@ -99,6 +99,9 @@ FsAnswerChoice >> analysisDescription [
 
 { #category : #accessing }
 FsAnswerChoice >> analysisText [
+	| hasNothingToShow |
+	hasNothingToShow := self gradeText isEmpty and: [ self analysis isEmpty ].
+	hasNothingToShow ifTrue: [ ^ '' asRopedText ].
 	^ self gradeText, ' ' asRopedText, self analysis asRopedText italic
 ]
 
@@ -130,7 +133,10 @@ FsAnswerChoice >> gradeDescription [
 { #category : #accessing }
 FsAnswerChoice >> gradeText [
 	| result |
-	result := self grade asRopedText.
+	self grade 
+		ifNotNil: [ :g | result := g asRopedText ]
+		ifNil: [ ^ '' asRopedText ].
+		
 	self grade = 2 ifTrue: [ ^ result foreground: Color green ].
 	self grade = 1 ifTrue: [ ^ result foreground: Color yellow ].
 	self grade = -1 ifTrue: [ ^ result foreground: Color orange ].
