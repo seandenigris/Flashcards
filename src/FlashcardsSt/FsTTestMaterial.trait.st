@@ -8,7 +8,7 @@ FsTTestMaterial >> keywordsDoWithIndex: aBlock [
 	#('every' 'must' 'only'
 	'all' 'always' 'never' 'whenever' "absolutes; be suspicious"
 	'best' 'except' 'first' 'no' 'none' 'not' "Can flip what is actually asked"
-	'most' 'some' 'usually' "non-absolutes; more likely to be right") do: [ :keyword |
+	'least' 'may' 'most' 'often' 'some' 'usually' "non-absolutes; more likely to be right") do: [ :keyword |
 		| index |
 		index := 0.
 		[ 
