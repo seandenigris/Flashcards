@@ -151,6 +151,15 @@ FsQuestion >> fsExportAnalysisTo: aQuestion [
 ]
 
 { #category : #accessing }
+FsQuestion >> gtAnswerChoicesViewFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Choices';
+		priority: 75;
+		items: [ self answerChoices ]
+]
+
+{ #category : #accessing }
 FsQuestion >> gtElementViewFor: aView [
 	<gtView>
 	^ aView explicit
