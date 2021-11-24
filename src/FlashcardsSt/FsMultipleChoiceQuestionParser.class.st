@@ -50,9 +50,7 @@ FsMultipleChoiceQuestionParser >> choiceLetter [
 FsMultipleChoiceQuestionParser >> choicePrefix [
 	| choiceLetter |
 	choiceLetter := PP2PredicateObjectNode anyOf: 'abcdABCD'. "case is a common OCR error, so accept either"
-	^ #startOfLine asPParser,  #space asPParser star, choiceLetter, 
-		#space asPParser optional, "common OCR error"
-			'.' asPParser, $) asPParser optional ==> [ :n | n third asLowercase ].
+	^ (self prefixWithToken: choiceLetter) ==> [ :n | n third asLowercase ].
 ]
 
 { #category : #accessing }
@@ -66,10 +64,17 @@ FsMultipleChoiceQuestionParser >> newQuestionFromNumber: aNumber string: aString
 ]
 
 { #category : #accessing }
-FsMultipleChoiceQuestionParser >> questionPrefix [
-	^ #startOfLine asPParser, #space asPParser star, #digit asPParser plus flatten, 
+FsMultipleChoiceQuestionParser >> prefixWithToken: aParser [
+	| prefixEnding |
+	prefixEnding := PP2PredicateObjectNode anyOf: ':.)'.
+	^ #startOfLine asPParser, #space asPParser star, aParser, 
 		#space asPParser optional, "common OCR error"
-		'.' asPParser, $) asPParser optional ==> #third.
+			prefixEnding plus
+]
+
+{ #category : #accessing }
+FsMultipleChoiceQuestionParser >> questionPrefix [
+	^ (self prefixWithToken: #digit asPParser plus flatten) ==> #third.
 ]
 
 { #category : #accessing }
