@@ -4,6 +4,11 @@ Class {
 	#category : #BaselineOfFlashcardsSt
 }
 
+{ #category : #testing }
+BaselineOfFlashcardsSt class >> isDynabook [
+	^ true
+]
+
 { #category : #baseline }
 BaselineOfFlashcardsSt >> baseline: spec [
 	<baseline>
