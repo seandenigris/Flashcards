@@ -30,6 +30,11 @@ FsScenario class >> lepiterDatabase [
 ]
 
 { #category : #accessing }
+FsScenario >> answerChoices [
+	^ self questions flatCollect: #answerChoices
+]
+
+{ #category : #accessing }
 FsScenario >> contents [
 	^ self lepiterPage
 ]
@@ -133,4 +138,9 @@ FsScenario >> source [
 { #category : #accessing }
 FsScenario >> source: anObject [
 	source := anObject
+]
+
+{ #category : #accessing }
+FsScenario >> sources [
+	^ self questions flatCollect: #sources
 ]
