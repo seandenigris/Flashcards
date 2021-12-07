@@ -142,5 +142,5 @@ FsScenario >> source: anObject [
 
 { #category : #accessing }
 FsScenario >> sources [
-	^ self questions flatCollect: #sources
+	^ { self source }
 ]
