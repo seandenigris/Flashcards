@@ -90,7 +90,7 @@ FsQuestionElement >> model: anObject [
 	model := anObject.
 	self removeChildren.
 	
-	textElement := self newElementWithText: self model text.
+	textElement := self newElementWithText: self model number asString, '. ', self model text.
 	self addChild: textElement.
 	
 	self model answerChoices do: [ :ans | self addChild: (ans asElement fontSize: self fontSize) ]
