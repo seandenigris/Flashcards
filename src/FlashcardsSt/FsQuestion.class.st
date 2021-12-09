@@ -268,3 +268,8 @@ FsQuestion >> textDescription [
 		accessor: #text;
 		yourself
 ]
+
+{ #category : #accessing }
+FsQuestion >> title [
+	^ self text
+]

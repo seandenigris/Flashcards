@@ -34,11 +34,6 @@ FsScenario >> answerChoices [
 	^ self questions flatCollect: #answerChoices
 ]
 
-{ #category : #accessing }
-FsScenario >> contents [
-	^ self lepiterPage
-]
-
 { #category : #'accessing-magritte' }
 FsScenario >> descriptionName [
 	<magritteDescription>
@@ -65,13 +60,40 @@ FsScenario >> descriptionSource [
 ]
 
 { #category : #accessing }
-FsScenario >> gtViewContentsOn: aView [
+FsScenario >> displayStringOn: aStream [
+	name ifNil: [ ^ super printOn: aStream ].
+	aStream
+		nextPut: $";
+		nextPutAll: self name;
+		nextPut: $";
+		nextPutAll: ' Scenario';
+		crlf; crlf;
+		print: self text asMarkdownString;
+		crlf; crlf.
+		
+	self questions
+		do: [ :q | aStream print: q ]
+		separatedBy: [ aStream crlf; crlf ]
+]
+
+{ #category : #accessing }
+FsScenario >> gtViewFullTextOn: aView [
+	<gtView>
+	
+	^ aView text
+		title: 'Text (Full)';
+		priority: 20;
+		text: [ self fullDisplayString ]
+]
+
+{ #category : #accessing }
+FsScenario >> gtViewTextOn: aView [
 	<gtView>
 	
 	^ aView forward
-		title: 'Contents';
+		title: 'Text';
 		priority: 10;
-		object: [ self contents ];
+		object: [ self text ];
 		view: #gtLiveFor:
 ]
 
@@ -108,14 +130,12 @@ FsScenario >> name: anObject [
 
 { #category : #accessing }
 FsScenario >> printOn: aStream [
-	name
-		ifNotNil: [ 
-			aStream
-				nextPut: $";
-				nextPutAll: self name;
-				nextPut: $";
-				nextPutAll: ' Scenario' ]
-		ifNil: [ super printOn: aStream ]
+	name ifNil: [ ^ super printOn: aStream ].
+	aStream
+		nextPut: $";
+		nextPutAll: self name;
+		nextPut: $";
+		nextPutAll: ' Scenario'.
 ]
 
 { #category : #accessing }
@@ -143,4 +163,14 @@ FsScenario >> source: anObject [
 { #category : #accessing }
 FsScenario >> sources [
 	^ { self source }
+]
+
+{ #category : #accessing }
+FsScenario >> text [
+	^ self lepiterPage
+]
+
+{ #category : #accessing }
+FsScenario >> title [
+	^ self name
 ]
