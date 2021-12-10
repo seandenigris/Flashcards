@@ -7,7 +7,7 @@ Trait {
 FsTTestMaterial >> keywordsDoWithIndex: aBlock [
 	#('every' 'must' 'only'
 	'all' 'always' 'never' 'whenever' "absolutes; be suspicious"
-	'best' 'except' 'first' 'no' 'none' 'not' "Can flip what is actually asked"
+	'best' 'except' 'false' 'first' 'no' 'none' 'not' 'true' "Can flip what is actually asked"
 	'least' 'may' 'most' 'often' 'some' 'usually' "non-absolutes; more likely to be right") do: [ :keyword |
 		| index |
 		index := 0.

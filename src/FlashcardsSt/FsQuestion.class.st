@@ -222,6 +222,15 @@ FsQuestion >> questions [
 ]
 
 { #category : #accessing }
+FsQuestion >> rightAnswer: aCharacter [
+	| index |
+	"correctChoice := e answerChoices detect: [ :ac | ac letter = correctLetter ].
+		correctChoice grade: #Right" 
+	index := aCharacter asLowercase asciiValue - $a asciiValue + 1.
+	self rightAnswerIndex: index.
+]
+
+{ #category : #accessing }
 FsQuestion >> rightAnswerIndex: aNumber [
 	self answerChoices doWithIndex: [ :ans :i |
 		i = aNumber

@@ -30,7 +30,8 @@ FsAnswerKey class >> import: inputString applyingTo: questionCollection [
 
 { #category : #accessing }
 FsAnswerKey >> answers [
-	^ self maLazyFrom: self descriptionAnswers
+
+	^ self maLazyInstVarUsing: self descriptionAnswers
 ]
 
 { #category : #accessing }
@@ -38,13 +39,9 @@ FsAnswerKey >> answers: anObject [
 	answers := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 FsAnswerKey >> applyTo: aCollection [ 
-	aCollection doWithIndex: [ :e :i | 
-		| correctLetter correctChoice |
-		correctLetter := (self answers at: i) lowercase.
-		correctChoice := e answerChoices detect: [ :ac | ac letter = correctLetter ].
-		correctChoice grade: #Right ].
+	aCollection doWithIndex: [ :q :i | q rightAnswer: (self answers at: i) ].
 ]
 
 { #category : #'accessing-magritte' }
