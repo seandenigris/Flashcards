@@ -41,7 +41,7 @@ FsQuestion class >> example [
 			self new
 				number: 1;
 				text: 'Question?';
-				analysis: 'This question is straighforward. Don''t ready into it!';
+				analysis: 'This question is straighforward. Don''t read into it!';
 				answerChoices: { 
 					FsAnswerChoice exampleBestA.
 					FsAnswerChoice exampleWorstB.

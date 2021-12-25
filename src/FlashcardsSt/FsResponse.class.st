@@ -47,6 +47,16 @@ FsResponse >> gradeDescription [
 		yourself
 ]
 
+{ #category : #printing }
+FsResponse >> printOn: aStream [
+	aStream
+		nextPutAll: timestamp printUS;
+		space;
+		print: question;
+		space;
+		print: grade
+]
+
 { #category : #accessing }
 FsResponse >> question [
 	^ question
