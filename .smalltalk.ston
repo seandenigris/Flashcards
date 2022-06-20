@@ -1,0 +1,9 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'FlashcardsSt',
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ]
+}
