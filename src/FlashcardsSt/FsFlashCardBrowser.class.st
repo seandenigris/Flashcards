@@ -1,6 +1,6 @@
 Class {
 	#name : #FsFlashCardBrowser,
-	#superclass : #DynamicComposablePresenter,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'deck',
 		'flashcardWidget',
