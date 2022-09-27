@@ -13,26 +13,24 @@ FsCardDeck >> cards [
 ]
 
 { #category : #accessing }
-FsCardDeck >> gtGtSpotterFullFor: aStep [
+FsCardDeck >> gtGtSpotterFullFor: aSearch [
 	<gtSearch>
-	^ aStep listProcessor
+	^ aSearch list
 		priority: 5;
 		title: 'Full Search';
-		allCandidates: [ self cards ];
-		filter: GtFilterSubstrings;
-		candidatesLimit: 7;
+		items: [ self cards ];
+		matchSubstrings;
 		itemName: #fullDisplayString
 ]
 
 { #category : #accessing }
-FsCardDeck >> gtGtSpotterTitlesFor: aStep [
+FsCardDeck >> gtGtSpotterTitlesFor: aSearch [
 	<gtSearch>
-	^ aStep listProcessor
+	^ aSearch list
 		priority: 5;
 		title: 'Titles';
-		allCandidates: [ self cards ];
-		filter: GtFilterSubstrings;
-		candidatesLimit: 7;
+		items: [ self cards ];
+		matchSubstrings;
 		itemName: #title
 ]
 
