@@ -48,5 +48,5 @@ FsCardDeck >> gtViewCardsOn: aView [
 				ifTrue: [ each questions ]
 				ifFalse: [ #() ] ];
 		itemText: #title;
-		actionUpdateButtonTooltip: 'Update'.
+		actionUpdateButton
 ]
