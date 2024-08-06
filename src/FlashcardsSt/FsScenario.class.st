@@ -35,14 +35,6 @@ FsScenario >> answerChoices [
 ]
 
 { #category : #'accessing-magritte' }
-FsScenario >> descriptionName [
-	<magritteDescription>
-	^ MAStringDescription new
-		accessor: #name;
-		yourself
-]
-
-{ #category : #'accessing-magritte' }
 FsScenario >> descriptionQuestions [
 	<magritteDescription>
 	^ MAToManyRelationDescription new
@@ -120,12 +112,20 @@ FsScenario >> lepiterPage [
 { #category : #accessing }
 FsScenario >> name [
 
-	^ self maLazyInstVarUsing: self descriptionName
+	^ self maLazyInstVarUsing: self nameDescription
 ]
 
 { #category : #accessing }
 FsScenario >> name: anObject [
 	name := anObject
+]
+
+{ #category : #'accessing-magritte' }
+FsScenario >> nameDescription [
+	<magritteDescription>
+	^ MAStringDescription new
+		accessor: #name;
+		yourself
 ]
 
 { #category : #accessing }
