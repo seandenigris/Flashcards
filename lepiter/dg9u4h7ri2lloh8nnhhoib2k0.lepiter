@@ -1,0 +1,262 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "b0e3993e-0fe3-0d00-bcb0-86ec0a9538e3"
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Importing"
+	},
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T20:56:43.68078-05:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:01:51.09042-05:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "KWyaPg/jDQC8sQ/bCpU44w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Questions following a standard format can be automatically imported. Here's an example:  {{gtExample:FsMultipleChoiceQuestionParser class>>example}}\n\nSeveral variations are supported e.g. question numbers like `1:` vs. `1.`. See {{gtClass:FsMultipleChoiceQuestionParser}} grammer for more details."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-11-11T21:08:11.827762-05:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-11-11T21:08:54.450378-05:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "U/zabA/jDQCJshfFCpU44w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "For \"fill in the blank\" type questions which have no choices, importing analysis will create a single choice with the text \"click to show answer\""
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-11-11T21:11:15.253248-05:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-11-11T21:26:28.617942-05:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "zS4LeA/jDQCUDqZ5CpU44w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "For multiple choice questions, analysis can start with an optional general analysis that pertains to the whole question, and then individual analyses for each choice. Here is an example: {{gtExample:FsAnswerChoice class>>exampleImportAnalysis}}\n See {{gtMethod:String>>fsExportAnalysisTo:}} and {{gtMethod:FsAnswerChoice>>importAnalysisFrom:}} for more details."
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:03:39.762233-05:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:08:07.272516-05:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "TO2/UA/jDQC/0aOMCpU44w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Besides questions and answers, some workbooks give detailed analysis of why each choice is right or wrong and may rank choices on a scale e.g. -2 for worst to 2 for best. This information can also be imported and will be accepted in the following formats:"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:00:06.869103-05:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:00:06.869103-05:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "eXQ0UA/jDQC/v/bBCpU44w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:00:07.105047-05:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-11-11T21:00:07.105047-05:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Nw44UA/jDQC/www9CpU44w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2024-11-11T20:55:11.526122-05:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2024-11-11T20:55:18.335227-05:00"
+		}
+	}
+}

@@ -44,6 +44,18 @@ FsAnswerChoice class >> exampleGoodD [
 			result letter should equal: $d. ]
 ]
 
+{ #category : #examples }
+FsAnswerChoice class >> exampleImportAnalysis [
+	<gtExample>
+	^ self
+		given: [ self new order: 2; yourself ]
+		when: [ :inst |
+			inst importAnalysisFrom: 'b. +1 This choice is good, but not the best' ]
+		then: [ :result | 
+			result grade should equal: 1.
+			result analysis should equal: 'This choice is good, but not the best'. ]
+]
+
 { #category : #accessing }
 FsAnswerChoice class >> exampleNeutralC [
 	<gtExample>
@@ -138,7 +150,7 @@ FsAnswerChoice >> gradeText [
 		ifNil: [ ^ '' asRopedText ].
 		
 	self grade = 2 ifTrue: [ ^ result foreground: Color green ].
-	self grade = 1 ifTrue: [ ^ result foreground: Color yellow ].
+	self grade = 1 ifTrue: [ ^ result foreground: Color yellow darker darker ].
 	self grade = -1 ifTrue: [ ^ result foreground: Color orange ].
 	self grade = -2 ifTrue: [ ^ result foreground: Color red ].
 	^ result
@@ -157,6 +169,26 @@ FsAnswerChoice >> gtElementViewFor: aView [
 					c vertical matchParent ];
 				addChild: self asElement;
 				yourself ]
+]
+
+{ #category : #importing }
+FsAnswerChoice >> importAnalysisFrom: aString [
+	"aString - format is '{choice name}\.? \+?{grade} {analysis}' e.g. 'a. +2 this is the right answer because it is the best'"
+
+	^ aString
+		readStreamDo: [ :str | 
+			| gradeString listMarker anOrder |
+			listMarker := str next.
+			anOrder := listMarker isDigit
+				ifTrue: [ listMarker asNumber ]
+				ifFalse: [ listMarker asUppercase asciiValue - $A asciiValue + 1 ].
+			anOrder = self order ifFalse: [ self error: 'this doesn''t seem to be an analysis of this particular choice' ].
+			str upTo: Character space.
+			gradeString := str upTo: Character space.
+			self
+				order: anOrder;
+				grade: gradeString squeezeOutNumber;
+				analysis: str upToEnd ]
 ]
 
 { #category : #predicates }

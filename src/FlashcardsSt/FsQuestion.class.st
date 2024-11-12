@@ -66,7 +66,7 @@ FsQuestion class >> exportAsCSV [
 ]
 
 { #category : #'instance creation' }
-FsQuestion class >> from: aString [
+FsQuestion class >> fromString: aString [
 	^ self parser parse: aString
 ]
 
@@ -91,6 +91,7 @@ FsQuestion >> analysisDescription [
 	<magritteDescription>
 	^ MAMemoDescription new
 		accessor: #analysis;
+		priority: 300;
 		default: '';
 		yourself
 ]
@@ -111,13 +112,20 @@ FsQuestion >> answerChoices: anObject [
 	answerChoices := anObject
 ]
 
+{ #category : #accessing }
+FsQuestion >> answerChoicesAdd: aChoice [
+
+	self answerChoices add: aChoice
+]
+
 { #category : #'accessing-magritte' }
 FsQuestion >> answerChoicesDescription [
 	<magritteDescription>
 	^ MAToManyRelationDescription new
 		accessor: #answerChoices;
+		priority: 500;
 		classes: { FsAnswerChoice };
-		default: OrderedCollection new;
+		default: (SortedCollection sortUsing: #priority ascending);
 		yourself
 ]
 
@@ -171,7 +179,8 @@ FsQuestion >> gtElementViewFor: aView [
 					c horizontal matchParent.
 					c vertical matchParent ];
 				addChild: self asElement;
-				yourself ]
+				yourself ];
+		actionUpdateButton
 ]
 
 { #category : #'as yet unclassified' }
@@ -203,6 +212,7 @@ FsQuestion >> numberDescription [
 	<magritteDescription>
 	^ MANumberDescription new
 		accessor: #number;
+		priority: 100;
 		yourself
 ]
 
@@ -254,6 +264,7 @@ FsQuestion >> sourcesDescription [
 	<magritteDescription>
 	^ MAToManyRelationDescription new
 		accessor: #sources;
+		priority: 400;
 		classes: QuCitation subclasses;
 		default: Bag new;
 		yourself
@@ -275,6 +286,7 @@ FsQuestion >> textDescription [
 	<magritteDescription>
 	^ MAMemoDescription new
 		accessor: #text;
+		priority: 200;
 		yourself
 ]
 
