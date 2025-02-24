@@ -147,6 +147,22 @@ FsQuestion >> bestAnswer [
 ]
 
 { #category : #accessing }
+FsQuestion >> elementGtViewFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Element';
+		priority: 25;
+		stencil: [ 
+			BlScrollableElement new 
+				constraintsDo: [ :c |
+					c horizontal matchParent.
+					c vertical matchParent ];
+				addChild: self asElement;
+				yourself ];
+		actionUpdateButton
+]
+
+{ #category : #accessing }
 FsQuestion >> fsExportAnalysisTo: aQuestion [
 
 	self number ~= aQuestion number ifTrue: [ self error: 'Question number mismatch' ].
@@ -165,22 +181,6 @@ FsQuestion >> gtAnswerChoicesViewFor: aView [
 		title: 'Choices';
 		priority: 75;
 		items: [ self answerChoices ]
-]
-
-{ #category : #accessing }
-FsQuestion >> gtElementViewFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Element';
-		priority: 25;
-		stencil: [ 
-			BlScrollableElement new 
-				constraintsDo: [ :c |
-					c horizontal matchParent.
-					c vertical matchParent ];
-				addChild: self asElement;
-				yourself ];
-		actionUpdateButton
 ]
 
 { #category : #'as yet unclassified' }
