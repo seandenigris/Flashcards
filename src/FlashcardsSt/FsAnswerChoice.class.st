@@ -123,6 +123,21 @@ FsAnswerChoice >> asElement [
 ]
 
 { #category : #accessing }
+FsAnswerChoice >> elementGtViewFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Element';
+		priority: 25;
+		stencil: [ 
+			BlScrollableElement new 
+				constraintsDo: [ :c |
+					c horizontal matchParent.
+					c vertical matchParent ];
+				addChild: self asElement;
+				yourself ]
+]
+
+{ #category : #accessing }
 FsAnswerChoice >> grade [
 
 	^ self maLazyInstVarUsing: self gradeDescription
@@ -154,21 +169,6 @@ FsAnswerChoice >> gradeText [
 	self grade = -1 ifTrue: [ ^ result foreground: Color orange ].
 	self grade = -2 ifTrue: [ ^ result foreground: Color red ].
 	^ result
-]
-
-{ #category : #accessing }
-FsAnswerChoice >> gtElementViewFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Element';
-		priority: 25;
-		stencil: [ 
-			BlScrollableElement new 
-				constraintsDo: [ :c |
-					c horizontal matchParent.
-					c vertical matchParent ];
-				addChild: self asElement;
-				yourself ]
 ]
 
 { #category : #importing }
